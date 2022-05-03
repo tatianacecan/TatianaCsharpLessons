@@ -1,173 +1,61 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-namespace C_Sharp_Lesson_3_Homework
+namespace collect
 {
-    public class Homework
+    class Program
     {
-        public void GetCentralElementFromMatrix(int[,] matrixOfIntegers)
+        static void Main(string[] args)
         {
-            /*print to console the central element from matrixOfIntegers, if not exist print: "This matrix doesn't have a central element"
-             * |   input           | result             |
-             * |-------------------|--------------------|
-             * | {                 |                    |
-             * |  { 1,   3,  5},   |    The central     |
-             * |  {-1, 100, 11},   |  element is 100    |
-             * |  { 2,  15, 44}    |                    |
-             * |  }                |                    |
-             * |----------------------------------------|
-             * |{                  |                    |
-             * | { 1,  6, 21,  8 },| This matrix doesn't|
-             * | { 5, -4,  5,  7 },| have a central     |
-             * | {77,  5,  0, 74 } |  element           |
-             * | }                 |                    |
-             * ------------------------------------------
-             *    
-             */
-            //your code here
-
-             for (int i = 0; i < matrixOfIntegers.GetLength(0) / 2; i++)
-
-                    for (int j = 0; j < matrixOfIntegers.GetLength(1) / 2; j++)
-                    {
-                        if ((matrixOfIntegers.GetLength(0) % 2 != 0) && (matrixOfIntegers.GetLength(1) % 2 != 0))
-                        {
-
-                            Console.WriteLine(" The central element of this matrix is " + matrixOfIntegers[i + 1, j + 1]);
-                        }
-                        else
-                            Console.WriteLine("This matrix doesn't have a central element.");
-
-                    }
-
-        }
-        public void GetSummOfDiagonalsElements(int[,] matrixOfIntegers)
-        {
-            /*print to console the central element from matrixOfIntegers, if not exist print: "This matrix doesn't have a central element"
-             * |   input           | result              |
-             * |-------------------|---------------------|
-             * | {                 |                     |
-             * |  { 1,   3,  5},   | First diagonal: 145 |
-             * |  {-1, 100, 11},   | Second diagonal: 107|
-             * |  { 2,  15, 44}    |                     |
-             * |  }                |                     |
-             * |-----------------------------------------|
-             * |{                  |                     |
-             * | { 1,  6, 21,  8 },| This matrix doesn't |
-             * | { 5, -4,  5,  7 },| have a diagonals    |
-             * | {77,  5,  0, 74 } |                     |
-             * | }                 |                     |
-             * ------------------------------------------
-             *    
-             */
-
-            int sumFirst = 0;
-            int sumSecond = 0;
-            int x = 0;
-            int rows = matrixOfIntegers.GetLength(0);
-            int columns = matrixOfIntegers.GetLength(1);
-
-            if (rows.Equals(columns) && rows > 1)
-            {
-                for (int i = 0; i < rows; i++)
-                    sumFirst = sumFirst + matrixOfIntegers[i, i];
-
-                Console.WriteLine("First diagonal: "+ sumFirst);
+            //generic collections
 
 
-                for (int j = rows - 1; j >= 0; j--)
-                    sumSecond = sumSecond + matrixOfIntegers[x++, j];
+            // List<T>
 
-                Console.WriteLine("Second diagonal is: " + sumSecond);
-            }
-            else
-            {
-                Console.WriteLine("This matrix doesn't have a diagonal.");
-            }
-        }
-        public void StarPrinter(int triangleHight)
-        {
-            /* Write a programm that will print a triagle of stars  with hight = triangleHight
-             *  Example: triangleHight = 3;
-             *  Result:   *
-             *           * *
-             *          * * * 
-             */
-            //your code here
-            int hight = triangleHight;
+           IList<int> list = new List<int>();
+            list.Add(11);
+            list.Add(22);
+            list.Add(33);
+            list.Add(44);
+            list.Add(55);
+            Console.WriteLine(list.Contains(22));
+            Console.WriteLine(list.Contains(10));
+            Console.WriteLine(list.IndexOf(55));
+            list.Remove(11);
+            list.RemoveAt(1);
+            Console.WriteLine(string.Join(",", list));
 
+            var num = new List<int> { 34, 1, 3, 5, 8, 54 };
+            num.Sort();
+            Console.WriteLine(string.Join(",", num));
 
-            for (int i = 1; i <= hight; i++)
-            {
-                for (int j = 1; j <= hight - i; j++)
-                {
-                    Console.Write(" ");
-                    
-                }
-                for (int j = 1; j <= (2 * i) - 1; j++)
-                {
-                    Console.Write("*");
-                    
-                }
-                Console.WriteLine();
+            num.Reverse();
+            Console.WriteLine(string.Join(",", num));
+
+            // HashSet<T>
+
+            ISet<double> set = new HashSet<double>() { 1.3, 5.2, 9.2, 3.1, 6.3};
+            set.Contains(1.3);
+            set.Equals(9.2);
+            Console.WriteLine(set.GetType());
+            set.Remove(5.2);
+            Console.WriteLine(set.Sum());
+            Console.WriteLine(set.Average());
+            Console.WriteLine(set.Min());
 
 
-            }
+            //Dictionary<Tkey, Tvalue>
+
+            IDictionary<int, string> dict = new Dictionary<int, string>();
+            dict.Add(1, "Ana");
+            dict.Add(2, "Andrei");
+            dict.Add(3, "Ion");
+            dict.Add(5, "Elena");
+            Console.WriteLine(dict.ContainsKey(2));
+            Console.WriteLine(dict.Remove(3));
            
+
         }
-        public void SortList(IList<int> listOfNumbers)
-        {
-            //Print to console elements of  listOfNumbers in ascending order
-            //your code here
-
-            int temp;
-            for (int i = 0; i < listOfNumbers.Count-1; i++)
-
-                for (int j = i+1; j < listOfNumbers.Count; j++)
-
-                    if (listOfNumbers[i] > listOfNumbers[j])
-                    {
-
-                        temp = listOfNumbers[i];
-                        listOfNumbers[i] = listOfNumbers[j];
-                        listOfNumbers[j] = temp;
-
-                    }
-            Console.WriteLine("Sorted: ");
-            foreach (int num in listOfNumbers)
-            {
-                Console.Write(num + " ");
-            }
-        }
-        public static void Main(String[] args)
-        {
-            Homework homework = new Homework();
-
-            IList<int> list = new List<int>() { -5, 8, -7, 0, 44, 121, -7 };
-
-            int[,] matrix = new int[3, 3] {
-                { 1,   3,  5},
-                { 2, 3, 5},
-                {100, 56 , -54} };
-            int[,] matrix2 = new int[3, 4] {
-                { 1,   3,  5,   6},
-                { 2,   3,  5,  78},
-                {100, 56 , -54, 6} };
-
-            homework.GetCentralElementFromMatrix(matrix);
-            homework.GetCentralElementFromMatrix(matrix2);
-            homework.GetSummOfDiagonalsElements(matrix);
-            homework.GetSummOfDiagonalsElements(matrix2);
-            homework.StarPrinter(5);
-            homework.SortList(list);
-
-
-
-
-           
-        }
-
     }
 }
-    
